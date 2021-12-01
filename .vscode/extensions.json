@@ -1,0 +1,6 @@
+{
+    "recommendations": [
+        "cake-build.cake-vscode",
+        "ms-dotnettools.csharp"
+    ]
+}
