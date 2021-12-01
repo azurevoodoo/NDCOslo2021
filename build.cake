@@ -18,7 +18,7 @@ Task("Pack")
 Task("Upload-Artifacts")
     .IsDependentOn("Pack")
     .Does(()=>GitHubActions.Commands.UploadArtifact(
-        Directory("./artifacts"),
+        MakeAbsolute(Directory("./artifacts")),
         "NuGet"
     ));
 
