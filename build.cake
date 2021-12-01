@@ -22,4 +22,10 @@ Task("Upload-Artifacts")
         "NuGet"
     ));
 
-RunTarget(Argument("target", "Build"));
+Task("GitHubActions")
+    .IsDependentOn("Upload-Artifacts");
+
+Task("Default")
+    .IsDependentOn("Test");
+
+RunTarget(Argument("target", "Default"));
