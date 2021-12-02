@@ -29,10 +29,20 @@ Task("Pack")
 
 Task("Upload-Artifacts")
     .IsDependentOn("Pack")
-    .Does(()=>GitHubActions.Commands.UploadArtifact(
+    .Does(()=>{
+        if (GitHubActions.IsRunningOnGitHubActions)
+     {   
+        GitHubActions.Commands.UploadArtifact(
         MakeAbsolute(Directory("./artifacts")),
         $"NuGet{Context.Environment.Platform.Family}"
-    ));
+    );
+    }
+    else
+    {
+      Information("Not running on GitHub actions");   
+    }
+    }
+    );
 
 Task("GitHubActions")
     .IsDependentOn("Upload-Artifacts");
